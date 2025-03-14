@@ -17,7 +17,6 @@ class ProductAPITest(APITestCase):
         self.token = Token.objects.create(user=self.user)
         # Настраиваем клиент для отправки запросов с токеном
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
-        print(self.token.key)
         self.category = Category.objects.create(name="Шубы")
         self.product = Product.objects.create(
             name="Норковая шуба",
@@ -74,7 +73,6 @@ class CartAPITest(APITestCase):
         # Остальной код setUp, если он есть
         self.cart = Cart.objects.create(user=self.user)
         self.product = Product.objects.create(name="Шуба", price=100000.00)
-        print(self.product)
         self.cart_item = CartItem.objects.create(cart=self.cart, product=self.product, quantity=1)
 
     def test_get_cart(self):
