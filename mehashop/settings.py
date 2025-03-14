@@ -139,9 +139,9 @@ SOCIAL_AUTH_YANDEX_OAUTH2_REDIRECT_URI = 'http://localhost:8000/auth/social/yand
 
 SITE_ID = 1
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "optional"
-ACCOUNT_AUTHENTICATE_VIA_EMAIL = True
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_LOGIN_METHODS = ['email', 'username']
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

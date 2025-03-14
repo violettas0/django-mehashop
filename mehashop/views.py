@@ -158,26 +158,30 @@ class CreatePaymentView(APIView):
         else:
             return Response({"error": "Ошибка при создании платежа"}, status=status.HTTP_400_BAD_REQUEST)
 
+
 @csrf_exempt
 def yookassa_webhook(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        payment_id = data.get("object", {}).get("id")
-        payment_status = data.get("object", {}).get("status")
-
         try:
-            order = Order.objects.get(payment_id=payment_id)
-            order.payment_status = payment_status
-            if payment_status == "succeeded":
-                order.status = "paid"
-            elif payment_status == "canceled":
-                order.status = "canceled"
-            order.save()
-            return JsonResponse({"status": "ok"})
-        except Order.DoesNotExist:
-            return JsonResponse({"error": "Заказ не найден"}, status=400)
+            data = json.loads(request.body)
+            payment_id = data.get("object", {}).get("id")
+            payment_status = data.get("object", {}).get("status")
 
-    return JsonResponse({"error": "Invalid request"}, status=400)
+            try:
+                order = Order.objects.get(payment_id=payment_id)
+                order.payment_status = payment_status
+                if payment_status == "succeeded":
+                    order.status = "paid"
+                elif payment_status == "canceled":
+                    order.status = "canceled"
+                order.save()
+                return JsonResponse({"status": "ok"})
+            except Order.DoesNotExist:
+                return JsonResponse({"error": "Заказ не найден"}, status=400)
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Неправильный JSON формат"}, status=400)
+
+    return JsonResponse({"error": "Неверный запрос"}, status=400)
 
 
 
