@@ -70,7 +70,6 @@ class CartAPITest(APITestCase):
         # Настраиваем клиент для отправки запросов с токеном
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
-        # Остальной код setUp, если он есть
         self.cart = Cart.objects.create(user=self.user)
         self.product = Product.objects.create(name="Шуба", price=100000.00)
         self.cart_item = CartItem.objects.create(cart=self.cart, product=self.product, quantity=1)
