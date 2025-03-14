@@ -1,0 +1,102 @@
+[
+  {
+    "model": "mehashop.category",
+    "pk": 1,
+    "fields": {
+      "name": "Мех",
+      "parent": null
+    }
+  },
+  {
+    "model": "mehashop.category",
+    "pk": 2,
+    "fields": {
+      "name": "Искусственый Мех",
+      "parent": null
+    }
+  },
+  {
+    "model": "mehashop.product",
+    "pk": 1,
+    "fields": {
+      "name": "Норковая шуба",
+      "description": "Теплая и удобная",
+      "price": 5999.99,
+      "category": 1,
+      "attributes": {}
+    }
+  },
+  {
+    "model": "mehashop.product",
+    "pk": 2,
+    "fields": {
+      "name": "Соболиная Шуба",
+      "description": "...",
+      "price": 1299.99,
+      "category": 2,
+      "attributes": {}
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "testuser",
+      "password": "testpassword"
+    }
+  },
+  {
+    "model": "mehashop.cart",
+    "pk": 1,
+    "fields": {
+      "user": 1
+    }
+  },
+  {
+    "model": "mehashop.cartitem",
+    "pk": 1,
+    "fields": {
+      "cart": 1,
+      "product": 1,
+      "quantity": 2
+    }
+  },
+  {
+    "model": "mehashop.cartitem",
+    "pk": 2,
+    "fields": {
+      "cart": 1,
+      "product": 2,
+      "quantity": 1
+    }
+  },
+  {
+    "model": "mehashop.order",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "status": "в обработке",
+      "created_at": "2025-03-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "mehashop.orderitem",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "product": 1,
+      "quantity": 2,
+      "price": 5999.99
+    }
+  },
+  {
+    "model": "mehashop.orderitem",
+    "pk": 2,
+    "fields": {
+      "order": 1,
+      "product": 2,
+      "quantity": 1,
+      "price": 1299.99
+    }
+  }
+]
