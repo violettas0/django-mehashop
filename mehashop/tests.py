@@ -38,6 +38,7 @@ class ProductAPITest(APITestCase):
 
 
     def test_post_products(self):
+        """Тест POST-запроса для создания и получения продуктов."""
         # URL эндпоинта (используем reverse для получения URL по имени)
         url = reverse('product-list')
         # Данные для запроса
@@ -55,6 +56,7 @@ class ProductAPITest(APITestCase):
         self.assertEqual(response.data[0]['name'], "Норковая шуба")
 
     def test_get_product_detail(self):
+        """Тест GET-запроса для получения детальной информации о продукте."""
         url = reverse('product-detail', args=[self.product.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -62,6 +64,7 @@ class ProductAPITest(APITestCase):
         self.assertEqual(Decimal(response.data['price']), Decimal('100000.00'))
 
     def test_get_categories(self):
+        """Тест GET-запроса для получения списка категорий."""
         url = reverse('category-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -85,6 +88,7 @@ class CartAPITest(APITestCase):
         self.cart_item = CartItem.objects.create(cart=self.cart, product=self.product, quantity=1)
 
     def test_get_cart(self):
+        """Тест GET-запроса для получения содержимого корзины."""
         url = reverse('cart')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -92,6 +96,7 @@ class CartAPITest(APITestCase):
         self.assertEqual(response.data[0]['product']['name'], "Шуба")
 
     def test_post_order(self):
+        """Тест POST-запроса для создания заказа из корзины."""
         url = reverse('order-create')
         response = self.client.post(url)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
